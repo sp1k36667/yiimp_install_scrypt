@@ -115,7 +115,13 @@
     fi
 
     apt_install nginx
-    hide_output sudo rm /etc/nginx/sites-enabled/default
+    nginx_default="/etc/nginx/sites-enabled/default"
+	if [ -e "$nginx_default" ]; then
+		echo "Die Datei $nginx_default existiert und wird gelöscht."
+		sudo rm "$nginx_default"
+	else
+		echo "Die Datei $nginx_default existiert nicht."
+	fi
     hide_output sudo systemctl start nginx.service
     hide_output sudo systemctl enable nginx.service
     hide_output sudo systemctl start cron.service
