@@ -385,7 +385,12 @@
     hide_output sudo make
     
     # Compil Stratum
-    cd $HOME/yiimp/stratum
+    hide_output sudo apt install -y pkg-config libnghttp2-dev libidn2-0-dev librtmp-dev libpsl-dev libkrb5-dev libldap2-dev libgmp-dev libssl-dev libssl-dev libmysqlclient-dev libcurl4-openssl-dev libiniparser-dev
+	cd $HOME/yiimp/stratum/iniparser
+	hide_output sudo make
+	cd $HOME/yiimp/stratum/algos
+	hide_output sudo make
+	cd $HOME/yiimp/stratum
     if [[ ("$BTC" == "y" || "$BTC" == "Y") ]]; then
     sudo sed -i 's/CFLAGS += -DNO_EXCHANGE/#CFLAGS += -DNO_EXCHANGE/' $HOME/yiimp/stratum/Makefile
     fi
